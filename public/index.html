@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="yarnApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Yarn Yardage Calculator</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+</head>
+
+<body ng-controller="YarnController">
+
+<h1>Yarn Yardage Calculator</h1>
+
+<br>
+
+<select ng-model="project.weight">
+    <option value="" disabled selected>Yarn Weight</option>
+    <option ng-repeat="weight in weights">{{ weight }}</option>
+</select>
+
+<br>
+
+<select ng-model="project.type">
+    <option value="" disabled selected>Project Type</option>
+    <option ng-repeat="type in projectTypes">{{ type }}</option>
+</select>
+
+<br>
+
+<button type="submit" ng-click="getYardage(project.weight, project.type)">Calculate</button>
+
+<h2>Yardage: {{ yardage }} yards</h2>
+
+<input ng-model="project.name" placeholder="Project Name">
+
+<br>
+<br>
+
+<textarea ng-model="project.notes" placeholder="Project Notes"></textarea>
+
+<br>
+
+<button ng-click="saveProject(project)">Save This Project</button>
+
+<br>
+
+<button ng-click="showProjects()">See All Saved Projects</button>
+
+<br>
+<br>
+
+<div style="overflow-x:auto;">
+    <table>
+        <thead>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Weight</th>
+        <th>Yardage</th>
+        <th>Notes</th>
+        <th>Edit</th>
+        <th>Remove</th>
+        </thead>
+        <tr ng-repeat="project in projects">
+            <td>{{ project.name }}</td>
+            <td>{{ project.type }}</td>
+            <td>{{ project.weight }}</td>
+            <td class="yardage">{{ project.yardage }}</td>
+            <td>{{ project.notes }}</td>
+            <td>{{ project.edit }}</td>
+            <td>{{ project.delete }}</td>
+        </tr>
+    </table>
+</div>
+
+<!--<button>Browse Yardages</button>-->
+
+<script src="app.js"></script>
+<script src="services/yardages.js"></script>
+<script src="services/projectService.js"></script>
+
+</body>
+</html>
